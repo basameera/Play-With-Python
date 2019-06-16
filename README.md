@@ -4,11 +4,14 @@
 
 ![](https://www.perforce.com/sites/default/files/images/blog/python-logo_400x400_2.jpg "Python Logo")
 
-## To Do;
-- [ ] Custom python tools - `bass_util.py`, `txt_logger`, `cmd_logger`
-- [x] Python project structure
-- [x] Project automation
-- [x] Python packaging
+---
+# Custom python tools
+- [ ] make `bass_util.py` a module
+- [ ] put `txt_logger`, `cmd_logger`to `bass_util.py` 
+
+# Python project structure
+
+# Project automation
 
 # Python-Package
 Learn to make python packages
