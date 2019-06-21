@@ -2,13 +2,18 @@
 
 [Python>=3.6]
 
-![](https://www.perforce.com/sites/default/files/images/blog/python-logo_400x400_2.jpg "Python Logo")
+<img src="https://www.perforce.com/sites/default/files/images/blog/python-logo_400x400_2.jpg" alt="" width="200"/>
 
-## To Do;
-- [ ] Custom python tools - `bass_util.py`, `txt_logger`, `cmd_logger`
-- [x] Python project structure
-- [x] Project automation
-- [x] Python packaging
+- [ ] Figure out how to share the same file/folder between two git repos. (e.g. `bass_util.py`) = https://git-scm.com/docs/git-submodule
+
+---
+# Custom python tools
+- [ ] make `bass_util.py` a module
+- [ ] put `txt_logger`, `cmd_logger`to `bass_util.py` 
+
+# Python project structure
+
+# Project automation
 
 # Python-Package
 Learn to make python packages
