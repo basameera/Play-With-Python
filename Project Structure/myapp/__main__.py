@@ -29,7 +29,7 @@ def cmdArgs():
     parser.add_argument('--ltype', type=str, default='s', metavar='',
                         help='Type of the loading model, \'s\': only states, \'f\': full model (default: \'s\') (**Required for loading)')
     parser.add_argument('--lpath', type=str, default='', metavar='',
-                        help='Path to the loading model. (e.g. \'path\\to\model\model_name.pth\') (**Required for loading)')
+                        help=r'Path to the loading model. (e.g. \'path\\to\model\model_name.pth\') (**Required for loading)')
 
     # save param
     parser.add_argument('--save-model', type=str, default='s', metavar='',
