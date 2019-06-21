@@ -7,6 +7,8 @@ def clog(*args):
     for s in args:
         msg = msg + ' ' + str(s)
     print(msg)
+    print('***')
+    print('###')
 
 
 def main():

@@ -1,5 +1,6 @@
 import argparse
-
+import SkunkWork
+from SkunkWork.utils import clog
 
 def cmdArgs():
     parser = argparse.ArgumentParser(
@@ -43,3 +44,4 @@ def cmdArgs():
 if __name__ == "__main__":
     print('main')
     print(cmdArgs())
+    clog('SkunkWork package works')
