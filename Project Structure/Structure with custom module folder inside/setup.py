@@ -1,6 +1,6 @@
 from setuptools import setup
 # from setuptools import setup, find_packages
-
+# https://python-packaging.readthedocs.io/en/latest/index.html
 '''
 1. Install custom package
 
