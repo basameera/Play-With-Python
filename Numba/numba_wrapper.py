@@ -7,11 +7,11 @@ try:
 except ImportError:
     import warnings
     warning_text = \
-        "\n\n" + "!" * 53 + "\n" + \
+        "\n\n" + "!" * 50 + "\n" + \
         "Could not import from numba, which means that some\n" + \
-        "parts of this code may run MUCH more slowly.  You\n" + \
-        "may wish to install numba." + \
-        "\n" + "!" * 53 + "\n"
+        "parts of this code may run MUCH more slowly.\n" + \
+        "You may wish to install numba." + \
+        "\n" + "!" * 50 + "\n"
     warnings.warn(warning_text)
 
     def _identity_decorator_outer(*args, **kwargs):
