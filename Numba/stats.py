@@ -2,8 +2,6 @@ import subprocess
 from skylynx.utils import yaml_write, cli_args, yaml_read
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-import seaborn as sns
 
 if __name__ == "__main__":
     cli_params = dict(
@@ -22,7 +20,7 @@ if __name__ == "__main__":
 
         cmd_list = cmd.replace('"', '').split(' ')
 
-        n_itr = 1000
+        n_itr = 100
         print(cmd, n_itr)
         results = []
 
@@ -36,7 +34,7 @@ if __name__ == "__main__":
 
     # combine files and plot
     if task == 2:
-        files = ['abc', '2_abc']
+        files = ['abc', '2_abc', '3_abc', '4_abc']
         mean = []
         std = []
         data = dict()
@@ -53,16 +51,18 @@ if __name__ == "__main__":
 
         # https://benalexkeen.com/bar-charts-in-matplotlib/
         plt.style.use('ggplot')
-        x = ['Pure Python', 'Numba @jit']
+        x = ['Pure Python', 'Numba @jit', 'Numba @njit', 'Numba @jit(nopython)']
         energy = mean
         variance = std
 
         x_pos = [i for i, _ in enumerate(x)]
 
-        plt.bar(x_pos, energy, color='green', yerr=variance, capsize=10.0)
+        fig, ax = plt.subplots(figsize=(7, 4), constrained_layout=True)
+
+        ax.bar(x_pos, energy, color='green', yerr=variance, capsize=10.0)
         plt.xlabel("File names")
         plt.ylabel("Execution time (seconds)")
-        plt.title("Effects of Numba")
+        plt.title("Effects of Numba (loop of 1e6)")
 
         plt.xticks(x_pos, x)
         plt.savefig('stats.pdf')

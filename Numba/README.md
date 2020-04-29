@@ -47,5 +47,6 @@ print("Elapsed (after compilation) = %s" % (end - start))
 
 http://numba.pydata.org/numba-doc/latest/user/5minguide.html
 https://thedatafrog.com/en/articles/make-python-fast-numba/
+https://kratzert.github.io/2017/09/12/introduction-to-the-numba-library.html
 
 
