@@ -27,10 +27,24 @@ def drawAruco(image, ids, corners):
             image = cv2.line(image, tuple(corners_sq[3]), tuple(
                 corners_sq[0]), color, thickness)
 
-            image = cv2.putText(image, str(value[0]), tuple(corners_sq[0]), font,
+            area = PolygonArea(corners_sq)
+
+            image = cv2.putText(image, str(value[0]) + ' [' + str(area) + ']', tuple(corners_sq[0]), font,
                                 fontScale, (255, 0, 0), thickness, cv2.LINE_AA)
 
     return image
+
+
+def PolygonArea(corners):
+    # https://stackoverflow.com/questions/24467972/calculate-area-of-polygon-given-x-y-coordinates
+    n = len(corners)  # of corners
+    area = 0.0
+    for i in range(n):
+        j = (i + 1) % n
+        area += corners[i][0] * corners[j][1]
+        area -= corners[j][0] * corners[i][1]
+    area = abs(area) / 2.0
+    return area
 
 
 if __name__ == "__main__":
