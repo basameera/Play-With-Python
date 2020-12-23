@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 
 def aruco_init():
@@ -16,16 +17,17 @@ def drawAruco(image, ids, corners):
     if len(ids) > 0:
 
         for n, value in enumerate(ids):
-            image = cv2.line(image, tuple(corners[n][0][0]), tuple(
-                corners[n][0][1]), color, thickness)
-            image = cv2.line(image, tuple(corners[n][0][1]), tuple(
-                corners[n][0][2]), color, thickness)
-            image = cv2.line(image, tuple(corners[n][0][2]), tuple(
-                corners[n][0][3]), color, thickness)
-            image = cv2.line(image, tuple(corners[n][0][3]), tuple(
-                corners[n][0][0]), color, thickness)
+            corners_sq = np.squeeze(corners[n])
+            image = cv2.line(image, tuple(corners_sq[0]), tuple(
+                corners_sq[1]), color, thickness)
+            image = cv2.line(image, tuple(corners_sq[1]), tuple(
+                corners_sq[2]), color, thickness)
+            image = cv2.line(image, tuple(corners_sq[2]), tuple(
+                corners_sq[3]), color, thickness)
+            image = cv2.line(image, tuple(corners_sq[3]), tuple(
+                corners_sq[0]), color, thickness)
 
-            image = cv2.putText(image, str(value[0]), tuple(corners[n][0][0]), font,
+            image = cv2.putText(image, str(value[0]), tuple(corners_sq[0]), font,
                                 fontScale, (255, 0, 0), thickness, cv2.LINE_AA)
 
     return image

@@ -4,7 +4,7 @@
 
 import cv2
 import utils as ut
-
+import numpy as np
 
 if __name__ == "__main__":
 
