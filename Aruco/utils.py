@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-
+import yaml
 
 def calc_centers(corners):
     centers = list()
@@ -68,6 +68,42 @@ def PolygonArea(corners):
         area -= corners[j][0] * corners[i][1]
     area = abs(area) / 2.0
     return area
+
+
+def read_calibration_ros(fname="calibration_matrix.yaml"):
+    with open(fname, "r") as f:
+        calib_data = yaml.load(f, Loader=yaml.FullLoader)
+    camera_matrix = np.asarray(
+        calib_data['camera_matrix']['data'], dtype=np.float).reshape(3, 3)
+    dist_coeff = np.asarray(
+        calib_data['distortion_coefficients']['data'], dtype=np.float)
+    return camera_matrix, dist_coeff
+
+
+def resize_image_w_dim(img, dim=(320, 240), inter=cv2.INTER_AREA):
+    '''
+    dim = (width, height)
+    '''
+    return cv2.resize(img, dim, interpolation=inter)
+
+
+def aspect_validate(w_aspect=16, h_aspect=9, w_val=16, h_val=9):
+    target_aspect_ratio = h_aspect/w_aspect  # 9/16
+
+    # try to choose the best side to crop out an image with target aspect ratio
+    h_crop = 0
+    w_crop = 0
+
+    aspect_ratio = h_val/w_val
+    if (aspect_ratio <= target_aspect_ratio):
+        principle_axis = 'h'
+        h_crop = h_val
+        w_crop = (w_aspect * h_crop)/h_aspect
+    elif (aspect_ratio > target_aspect_ratio):
+        principle_axis = 'w'
+        w_crop = w_val
+        h_crop = (h_aspect * w_val)/w_aspect
+    return int(w_crop), int(h_crop)
 
 
 if __name__ == "__main__":
