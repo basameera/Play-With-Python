@@ -14,7 +14,7 @@ image_width = 1280
 # image_width = 640
 
 
-safe_zone_sz_x = 50
+safe_zone_sz_x = 100
 safe_zone_sz_y = 50
 
 centers = None
