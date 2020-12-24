@@ -32,7 +32,16 @@ def drawAruco(image, ids, corners):
             image = cv2.putText(image, str(value[0]) + ' [' + str(area) + ']', tuple(corners_sq[0]), font,
                                 fontScale, (255, 0, 0), thickness, cv2.LINE_AA)
 
-    return image
+            # center of aruco
+            # center_x = (x1 + x3)//2
+            # center_y = (y1 + y3)//2
+            center_x = int((corners_sq[0, 0] + corners_sq[2, 0])/2)
+            center_y = int((corners_sq[0, 1] + corners_sq[2, 1])/2)
+            
+            image = cv2.putText(image, str((center_x, center_y)), (center_x, center_y), font,
+                                fontScale, (0, 255, 0), thickness, cv2.LINE_AA)
+
+    return image, (center_x, center_y)
 
 
 def PolygonArea(corners):
