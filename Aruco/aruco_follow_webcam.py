@@ -1,15 +1,10 @@
 import cv2
 import utils as ut
+import numpy as np
 
 
 def image_resize(image, h, w):
     return cv2.resize(image, (h, w), interpolation=cv2.INTER_AREA)
-
-
-def cam_coord_to_quadrant_coord(image_coord, center_coord):
-    quad_coord_x = image_coord[0] - center_coord[0]
-    quad_coord_y = center_coord[1] - image_coord[1]
-    return (quad_coord_x, quad_coord_y)
 
 
 if __name__ == "__main__":
@@ -22,7 +17,8 @@ if __name__ == "__main__":
     image_center_y = image_height//2
     safe_zone_sz_x = 100
     safe_zone_sz_y = 100
-    # coordinate
+
+    centers = None
 
     # Check if the webcam is opened correctly
     if not cap.isOpened():
@@ -37,9 +33,14 @@ if __name__ == "__main__":
             image, arucoDict, parameters=arucoParams)
 
         if ids is not None:
-            image, (center_x, center_y) = ut.drawAruco(image, ids, corners)
+            centers = ut.calc_centers(corners)
+            image = ut.drawAruco(image, ids, corners, centers)
 
-            (quad_coord_x, quad_coord_y) = cam_coord_to_quadrant_coord(
+            # only the first Aruco detected will be followed
+            # NOTE: need a method to handle multiple Aruco
+            center_x, center_y = centers[0]
+
+            (quad_coord_x, quad_coord_y) = ut.cam_coord_to_quadrant_coord(
                 (center_x, center_y), (image_center_x, image_center_y))
 
             # print(center_x, center_y, ' | ', quad_coord_x, quad_coord_y)
