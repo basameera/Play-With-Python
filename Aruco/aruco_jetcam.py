@@ -27,5 +27,4 @@ if __name__ == "__main__":
         if c == 27:
             break
 
-    cap.release()
     cv2.destroyAllWindows()
