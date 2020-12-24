@@ -42,7 +42,7 @@ image_center_y = int(image_height/2)
 aspect_roi_x = image_center_x - w_crop_half
 aspect_roi_y = image_center_y - h_crop_half
 
-robot_turn_speed = 0.3
+robot_turn_speed = 0.1
 
 if __name__ == "__main__":
 
