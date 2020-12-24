@@ -9,6 +9,10 @@ if __name__ == "__main__":
 
     image_height = 720
     image_width = 1280
+    
+    image_height = 360
+    image_width = 640
+    
     image_center_x = image_width//2
     image_center_y = image_height//2
     safe_zone_sz_x = 100
@@ -32,19 +36,19 @@ if __name__ == "__main__":
             # only the first Aruco detected will be followed
             # NOTE: need a method to handle multiple Aruco
             center_x, center_y = centers[0]
-            print(center_x, center_y)
-            # (quad_coord_x, quad_coord_y) = ut.cam_coord_to_quadrant_coord(
-                # (center_x, center_y), (image_center_x, image_center_y))
+            # print(center_x, center_y)
+            (quad_coord_x, quad_coord_y) = ut.cam_coord_to_quadrant_coord(
+                (center_x, center_y), (image_center_x, image_center_y))
 
             # print(center_x, center_y, ' | ', quad_coord_x, quad_coord_y)
-            # turn_direction = ''
-            # if quad_coord_x > safe_zone_sz_x:
-            #     turn_direction = 'right'
-            # elif quad_coord_x < (-safe_zone_sz_x):
-            #     turn_direction = 'left'
-            # else:
-            #     turn_direction = 'STOP'
-            # print(center_x, ' | ', quad_coord_x, ' | ', turn_direction)
+            turn_direction = ''
+            if quad_coord_x > safe_zone_sz_x:
+                turn_direction = 'right'
+            elif quad_coord_x < (-safe_zone_sz_x):
+                turn_direction = 'left'
+            else:
+                turn_direction = 'STOP'
+            print(center_x, ' | ', quad_coord_x, ' | ', turn_direction)
 
         cv2.imshow('Input', image)
 
