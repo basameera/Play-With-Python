@@ -2,6 +2,15 @@ import cv2
 import numpy as np
 import yaml
 
+
+def bound(input_sig, min_val, max_val):
+    if input_sig < min_val:
+        return min_val
+    elif input_sig > max_val:
+        return max_val
+    else:
+        return input_sig
+
 def calc_centers(corners):
     centers = list()
     for corner in corners:
