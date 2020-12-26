@@ -43,7 +43,8 @@ image_center_y = int(image_height/2)
 aspect_roi_x = image_center_x - w_crop_half
 aspect_roi_y = image_center_y - h_crop_half
 
-robot_turn_speed = 0.1
+robot_turn_speed = 0.15
+save_count = 0
 
 if __name__ == "__main__":
 
@@ -66,11 +67,11 @@ if __name__ == "__main__":
             image = camera.read()
 
             # undistort image - 90ms
-            image = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
+            #image = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
             # crop roi with aspect ration
-            image = image[aspect_roi_y:aspect_roi_y +
-                        h_crop, aspect_roi_x:aspect_roi_x+w_crop]
+            #image = image[aspect_roi_y:aspect_roi_y +
+            #            h_crop, aspect_roi_x:aspect_roi_x+w_crop]
 
             # resize image - 100ms
             image = ut.resize_image_w_dim(image, dim=(640, 360))
@@ -86,7 +87,10 @@ if __name__ == "__main__":
                 rz_center_y = int(h_rz//2)
                 centers = ut.calc_centers(corners)
                 image = ut.drawAruco(image, ids, corners, centers)
-
+                
+                #cv2.imwrite('save/{}.jpg'.format(save_count), image)
+                save_count += 1
+                
                 # only the first Aruco detected will be followed
                 # NOTE: need a method to handle multiple Aruco
                 center_x, center_y = centers[0]
@@ -116,14 +120,14 @@ if __name__ == "__main__":
                 # print(w_rz, h_rz, ' - ', center_x, ' | ',
                     # quad_coord_x, ' | ', turn_direction, end=' | ')
                 print(quad_coord_x, ' | ', turn_direction,
-                  ' | ', ctrl_sig)
+                  ' | ', ctrl_sig, end=' | ')
 
             else:
                 robot.stop()
 
             et = time.time()-tm
 
-            #print('   Time:', et)
+            print('   Time:', et)
             
     except KeyboardInterrupt:
         print("\nBye!")

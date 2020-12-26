@@ -2,6 +2,7 @@
 *.png
 *.csv
 *.zip
+.jpg
 .ipynb_checkpoints/
 
 # folders
